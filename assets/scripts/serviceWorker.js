@@ -1,4 +1,4 @@
-var cacheName='lzyVr-1::fundamentals';
+var version='lzyVrs-1::',cacheName=version+'fundamentals';
 
 function preCache() {
     caches.open(cacheName).then(function(cache) {
@@ -8,6 +8,7 @@ function preCache() {
         '/assets/styles/main.css',
         '/assets/scripts/main.js',
         '/assets/scripts/main__daisy.js',
+        '/assets/images/mic_20x29_cmp.png',
         '/loading.gif',
         '/manifest.json',
       ]);
@@ -80,10 +81,10 @@ self.addEventListener('fetch', function(event) {
   var url=new URL(event.request.url), pathname=url.pathname, hostname=url.hostname, headers=event.request.headers;
   if(event.request.method!=='GET'||(event.request.cache==='only-if-cached'&&event.request.mode!=='same-origin')||url.origin!=self.origin||/^\/Fetch\//i.test(pathname)) return;
   else if(/\.(jpe?g|png|gif)$/i.test(pathname)) event.respondWith(eitherCacheOrNet(event.request));
-  else if(/\.(js(on)?|css)$/i.test(pathname)||/^\/([\w-]+)?$/i.test(pathname)) event.respondWith(fromCacheOrNet(event.request));
+  else if(/\.(js(on)?|css)$/i.test(pathname)||/^\/([\w-]+)?$/.test(pathname)) event.respondWith(fromCacheOrNet(event.request));
   else event.respondWith(fromNetOrCache(event.request));
   if(/\.(js(on)?|css)$/i.test(pathname)) event.waitUntil(update(event.request));
-  else if(/^\/[\w-]+$/i.test(pathname)) event.waitUntil(update(event.request).then(refresh));
+  else if(/^\/([\w-]+)?$/i.test(pathname)) event.waitUntil(update(event.request).then(refresh));
 });
 
 self.addEventListener('activate', function(event) {
