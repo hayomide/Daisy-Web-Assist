@@ -32,7 +32,10 @@
         daisyInpt.value='';
         q=encodeURIComponent(trns);
         daisyInpt.value=trns;
-        if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/wikiHowTo?search='+encodeURIComponent(trnsMat[3]+trnsMat[4])),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
+        if(/\b(hey|hello|hi|what's\s+up|how\s+are\s+you)\b/i.test(trns)) readOutLoud('Hello, how are you doing today???');
+        else if(/\b(fu?c?k\s*(?!(yo?|yh)?u|off|out)|(god?)?damn(\s*it)?|shit|(?<=\w)shit)\b/i.test(trns)) readOutLoud('Am sorry. I will try to serve you better next time');
+        else if(trnsMat=trns.match(/\b(get\s*(off|out)|fuck\s*((yo?|yh)?u|off)|(mothe?r)?fu?c?ke?r|a(ss|rse)hole|di?c?ke?r|dumba(ss|rse))\b/i)) readOutLoud('Must you be harsh??? '+trnsMat[0]+' too!!!');
+        else if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/wikiHowTo?search='+encodeURIComponent(trnsMat[3]+trnsMat[4])),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
         else if(/(teach\s*(me)?|learn|study|read)/i.test(trns)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/Main-Page'),'https://m.wikihow.com/','Now showing you things to learn');
         else if(trnsMat=trns.match(/(what\s*(i|')s\s*happ?ening?|(get|be)\s*(info(rmation)?|inform(ed)?|up(\s*to\s*)?date(s|d)?)|inform\s*me)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://punchng.com/'),'https://punchng.com/','Now showing you News');
         else if(/\b(shut\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?(up|it|mouth)|It\s*(i|')s\s+ok(ay)?|keep\s+(quiet|calm))\b/i.test(trns)) { if(isTalking&&synth.speaking) synth.pause(); readOutLoud('Must you be harsh? Anyway, I will be keeping quiet'); }
@@ -66,20 +69,16 @@
         else if(trnsMat=trns.match(/\b(te?xt|sms|msg|message)\s*(to|with)?\s*(\S+)\b/i)) window.open('sms:'+trnsMat[3]);
         else if(trnsMat=trns.match(/\b(e?mail)\s*(to|with)?\s*(\S+)\b/i)) window.open('mailto:'+trnsMat[3]);
         else if(/\b(fine|good|great?|awesome|cool|kul|chilling?|wonderful)\b/i.test(trns)) readOutLoud('It feels great to you that. Do you need any help from me?');
-        else if(/\b(hey|hello|hi|what's\s+up|how\s+are\s+you)\b/i.test(trns)) readOutLoud('Hello, how are you doing today???');
-        else if(/\b(fu?c?k\s*(?!(yo?|yh)?u|off|out)|(god?)?damn(\s*it)?|shit|(?<=\w)shit)\b/i.test(trns)) readOutLoud('Am sorry. I will try to serve you better next time');
-        else if(trnsMat=trns.match(/\b(get\s*(off|out)|fuck\s*((yo?|yh)?u|off)|(mothe?r)?fu?c?ke?r|a(ss|rse)hole|di?c?ke?r|dumba(ss|rse))\b/i)) readOutLoud('Must you be harsh??? '+trnsMat[0]+' too!!!');
         else if(trnsMat=trns.match(/\b(?<!I|(w|s|t)?hey?)(mad(?!at)|an?\s*idiot|crazy|stupid|foolish|dumb)\b/i)) readOutLoud('Please, I don\'t like to hear that. Don\'t let me say you too are '+trnsMat[0]);
         else shwLnk('/lookup.php?url='+encodeURIComponent('https://www.quora.com/search?q='+encodeURIComponent(q)),'https://www.quora.com/');
     }
     
     function stopSpkn() {
-        // recog=false;
         daisyNote.innerHTML='';
+        document.getElementsByClassName('daisy')[0].classList.remove('usr-tlkn');
     }
     
     function useMic(c) {
-    
     spkn=new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
     spkn.lang = 'en-US';
     spkn.interimResults=false;
@@ -96,30 +95,23 @@
         
     spkn.onstart = function() {
         daisyNote.innerHTML='Start Saying Something now!';
+        document.getElementsByClassName('daisy')[0].classList.add('usr-tlkn');
     };
         
     spkn.onspeechend = function() {
         stopSpkn();
-    }
+    };
         
     spkn.onerror = function(event) {
-        if(event.error == 'no-speech') console.log('I did not hear you. Say it again');
+        if(event.error==='no-speech') console.log('I did not hear you. Say it again');
         stopSpkn();
     };
     
-    spkn.onend=function() {
-        stopSpkn();
-        // if(!noResp) spkn.start();
-        if(window.pausedByJennie===true) { playTrack(); window.pausedByJennie=false; }
-    };
+    spkn.onend=stopSpkn;
     
     }
     
-    function shakeJ() {
-        return;
-        var diasyAccl=daisyCaller.classList, x=setInterval(function() { if(daisyAccl.contains('scaled-dwn')) daisyAccl.add('scaled-dwn'); else daisyAccl.remove('scaled-dwn'); },800);
-        return clearInterval(x);
-    }
+    function shakeJ() { return; }
     
     function readOutLoud(message,noResp) {
         if(synth.speaking) synth.cancel();
@@ -129,8 +121,8 @@
         speech.volume = 1;
         speech.rate = 1;
         speech.pitch = 1;
-        speech.onend=function() { daisyNote.innerHTML=message; isTalking=false; micOn(c); };
-        speech.onend=function() { daisyNote.innerHTML=''; isTalking=true; micOff(); };
+        speech.onstart=function() { daisyNote.innerHTML=message; isTalking=true; };
+        speech.onend=function() { daisyNote.innerHTML=''; isTalking=false; };
         var voices=speechSynthesis.getVoices();
         for(i=0; i<voices.length; i++) {
             if(voices[i].name==='Google UK English Female') { speech.voice=voices[i]; break; }
@@ -138,15 +130,11 @@
         window.speechSynthesis.speak(speech);
         shakeJ();
         window.noResp=noResp;
-        // if(!noResp) spkn.start();
     }
     
-    function micOn(c) { useMic(c); if(!recog) { spkn.start(); recog=true } shakeJ(); mic='on'; }
+    function micOn(c) { useMic(c); if(!recog) { spkn.start(); recog=true } mic='on'; }
     function micOff() { if(typeof spkn==='undefined') return; spkn.stop(); stopSpkn(); daisyNote.innerHTML=''; mic='off'; }
     function intro() { readOutLoud(stripTags(document.getElementsByClassName('daisy__explnd')[0].innerHTML).trim().replace(/\n+/,'. ').replace(/\s+/,' ')); }
-    
-    // daisy.onmouseenter=micOn;
-    // daisy.onmouseleave=micOff;
     if(window.addEventListener) {
          daisyMicLnk.addEventListener('click',micOn);
          daisyIntroLnk.addEventListener('click',intro);
