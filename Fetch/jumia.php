@@ -25,8 +25,9 @@ foreach($html->find('.products>div>.link') as $prd) {
   $prdPrice=is_object($prd->find('.price-box [data-price]',1))?trim($prd->find('.price-box [data-price]',1)->plaintext):'';
   $prdName=is_object($prd->find('.title .name',0))?trim($prd->find('.title .name',0)->plaintext):'';
   $prdUrl=$prd->href;
-  if(is_object($prd->find('.image-wrapper img',0))) $prdPic=isset($prd->find('.image-wrapper img',0)->src)&&!empty($prd->find('.image-wrapper img',0)->src)?$prd->find('.image-wrapper img',0)->src:$prd->find('.image-wrapper img',0)->getAttribute('data-src');
-  if(!$prdPic) { /*echo "Pic URL not found<br />\n";*/ continue; }
+  if(is_object($prd->find('.image',0))) $prdPic=isset($prd->find('.image',0)->src)&&!empty($prd->find('.image',0)->src)?$prd->find('.image',0)->src:$prd->find('.image',0)->getAttribute('data-src');
+  else if(is_object($prd->find('noscript img',0))) $prdPic=isset($prd->find('noscript img',0)->src)&&!empty($prd->find('noscript img',0)->src)?$prd->find('noscript img',0)->src:$prd->find('noscript img',0)->getAttribute('data-src');
+  if(!$prdPic||(!$prdDiscPrice&&!$prdPrice)||!$prdName||!$prdUrl||!$prdStore||!$prdOrders) { /*echo "Pic URL not found<br />\n";*/ continue; }
   $prds[]=['name'=>$prdName,'url'=>$prdUrl,'pic_url'=>$prdPic,'price'=>$prdPrice,'discount_price'=>$prdDiscPrice,'orders'=>$prdOrders,'store'=>$prdStore];
 }
 $html=null;
