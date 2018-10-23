@@ -31,24 +31,30 @@
         daisyInpt.value='';
         q=encodeURIComponent(trns);
         daisyInpt.value=trns;
-        if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/lookup.php?origin='+encodeURIComponent('https://m.wikihow.com')+'&req_url='+encodeURIComponent('/wikiHowTo?search=')+'&query='+encodeURIComponent(trnsMat[3]+trnsMat[4]),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
-        else if(/(teach\s*(me)?|learn|study|read)/i.test(trns)) shwLnk('/lookup.php?origin='+encodeURIComponent('https://m.wikihow.com')+'&req_url='+encodeURIComponent('/Main-Page'),'https://m.wikihow.com/','Now showing you things to learn');
-        else if(trnsMat=trns.match(/(what\s*(i|')s\s*happ?ening?|(get|be)\s*(info(rmation)?|inform(ed)?|up(\s*to\s*)?date(s|d)?)|inform\s*me)/i)) shwLnk('/lookup.php?origin='+encodeURIComponent('https://punchng.com')+'&req_url='+encodeURIComponent('/'),'https://punchng.com/','Now showing you News');
+        if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/
+                                                                                                                      
+                                                                                                                      
+                                                                                                                      
+                                                                                                                      
+                                                                                                                      
+                                                                                                                      ='+encodeURIComponent('https://m.wikihow.com/wikiHowTo?search='+encodeURIComponent(trnsMat[3]+trnsMat[4])),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
+        else if(/(teach\s*(me)?|learn|study|read)/i.test(trns)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/Main-Page'),'https://m.wikihow.com/','Now showing you things to learn');
+        else if(trnsMat=trns.match(/(what\s*(i|')s\s*happ?ening?|(get|be)\s*(info(rmation)?|inform(ed)?|up(\s*to\s*)?date(s|d)?)|inform\s*me)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://punchng.com/'),'https://punchng.com/','Now showing you News');
         else if(/\b(shut\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?(up|it|mouth)|It\s*(i|')s\s+ok(ay)?|keep\s+(quiet|calm))\b/i.test(trns)) { if(isTalking&&synth.speaking) synth.pause(); readOutLoud('Must you be harsh? Anyway, I will be keeping quiet'); }
         else if(trnsMat=trns.match(/((?<!how|where|come|what\s*)about|wh(o|ere|at)\s*('(s|re)|is|a(re|rt|m)))\s*(.+)/i)) {
             var strt=trnsMat[1],val=trnsMat[6];
             if(strt!=='about'&&/\b(my|our|I|(w|s)?he|h(er|is))\b/.test(val)) readOutLoud('I don\'t answer personal questions');
             else if(strt!=='about'&&/\b(your?)\b/.test(val)) { res=val.replace(/your?/ig,'my')+'? Ain\'t gonna tell you. Find that out by yourself. You may be needing help from Elljay or Spider or Simi or any NaijaHacks official. Good luck!'; if(/\bname\b/i.test(val)) res='My name is Daisy'; else if(/\b(sponsor|promot)er|author\b/i.test(val)) res='NaijaHacks2018'; readOutLoud(res); }
-            else shwLnk('/lookup.php?origin='+encodeURIComponent('https://www.google.com')+'&req_url='+encodeURIComponent('/search?q=')+'&query='+encodeURIComponent(trnsMat[0]),'https://www.google.com/','Now showing you about -> '+val);
+            else shwLnk('/lookup.php?url='+encodeURIComponent('https://www.google.com/search?q='+encodeURIComponent(trnsMat[0])),'https://www.google.com/','Now showing you about -> '+val);
             strt=val='';
         }
         else if(trnsMat=trns.match(/((gi(ve)?|te(ll)?)\s*mm?e\s+(yo)?ur?)\s+(.+)/i)) readOutLoud(trnsMat[6].replace(/your?/ig,'my')+'? Ain\'t gonna tell you. Find that out by yourself. You may be needing help from Elljay or Spider or Simi or any NaijaHacks official. Good luck!');
-        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?\s+of\s+(.+)/i)) { shwLnk('/lookup.php?origin='+encodeURIComponent('https://smart.ejasounds.com')+'&req_url='+encodeURIComponent('/search?q=')+'&query='+encodeURIComponent(encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
-        else if(trnsMat=trns.match(/((new|trending?)\s*)?(.+(?=songs?))/i)) { shwLnk('/lookup.php?origin='+encodeURIComponent('https://smart.ejasounds.com')+'&req_url='+encodeURIComponent('/search?q=')+'&query='+encodeURIComponent(encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
-        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?/i)) { shwLnk('/lookup.php?origin='+encodeURIComponent('https://smart.ejasounds.com')+'&req_url='+encodeURIComponent('/'),'https://smart.ejasounds.com/','Now showing you '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs'); }
-        else if(trnsMat=trns.match(/((shop|order|buy)\s*)?(\S+\s+(\S+\s+)?(\S+\s+)?)?(expensive|cheap|new|old|trending?|popular|hot|most\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?)|best\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?))\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?\s*(on|from|at|in|of|by)\s*(All?i\s*E(x|s)?press?|Jumia)/i)) {
-            var que=trnsMat[9].trim(),clas=trnsMat[6];
-            if(/All?i\s*E(x|s)?press?/i.test(trnsMat[14])) {
+        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?\s+of\s+(.+)/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
+        else if(trnsMat=trns.match(/((new|trending?)\s*)?(.+(?=songs?))/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
+        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/'),'https://smart.ejasounds.com/','Now showing you '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs'); }
+        else if(trnsMat=trns.match(/((shopp?|order|buy)(ing)?\s*)?(\S+\s+(\S+\s+)?(\S+\s+)?)?(expensive|cheap|new|old|trending?|popular|hot|most\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?)|best\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?))\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?\s*(on|from|at|in|of|by)\s*(All?i\s*E(x|s)?press?|Jumia)/i)) {
+            var que=trnsMat[10].trim(),clas=trnsMat[7];
+            if(/All?i\s*E(x|s)?press?/i.test(trnsMat[15])) {
                 var sort='total_tranpro_desc';
                 switch(clas) {
                     case 'expensive': sort='price_desc'; break;
@@ -60,7 +66,7 @@
                 sort=null;
             } else shopJumia(que,clas);
         }
-        else if(trnsMat=trns.match(/((shop|order|buy)\s*)?(\S+\s+(\S+\s+)?(\S+\s+)?)?(expensive|cheap|new|old|trending?|popular|hot|most\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?)|best\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?))\s+(.+)/i)) shopJumia(trnsMat[9],trnsMat[6]);
+        else if(trnsMat=trns.match(/((shopp?|order|buy)(ing)?\s*)?(\S+\s+(\S+\s+)?(\S+\s+)?)?(expensive|cheap|new|old|trending?|popular|hot|most\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?)|best\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?))\s+(.+)/i)) shopJumia(trnsMat[10],trnsMat[7]);
         else if(trnsMat=trns.match(/\b(phone|diall?|call|phone\s*call|(talk|speak)\s*(to|with))\s*(\S+)\b/i)) window.open('tel:'+trnsMat[4]);
         else if(trnsMat=trns.match(/\b(te?xt|sms|msg|message)\s*(to|with)?\s*(\S+)\b/i)) window.open('sms:'+trnsMat[3]);
         else if(trnsMat=trns.match(/\b(e?mail)\s*(to|with)?\s*(\S+)\b/i)) window.open('mailto:'+trnsMat[3]);
@@ -69,7 +75,7 @@
         else if(/\b(fu?c?k\s*(?!(yo?|yh)?u|off|out)|(god?)?damn(\s*it)?|shit|(?<=\w)shit)\b/i.test(trns)) readOutLoud('Am sorry. I will try to serve you better next time');
         else if(trnsMat=trns.match(/\b(get\s*(off|out)|fuck\s*((yo?|yh)?u|off)|(mothe?r)?fu?c?ke?r|a(ss|rse)hole|di?c?ke?r|dumba(ss|rse))\b/i)) readOutLoud('Must you be harsh??? '+trnsMat[0]+' too!!!');
         else if(trnsMat=trns.match(/\b(?<!I|(w|s|t)?hey?)(mad(?!at)|an?\s*idiot|crazy|stupid|foolish|dumb)\b/i)) readOutLoud('Please, I don\'t like to hear that. Don\'t let me say you too are '+trnsMat[0]);
-        else shwLnk('/lookup.php?origin='+encodeURIComponent('https://www.quora.com')+'&req_url='+encodeURIComponent('/search?q=')+'&query='+encodeURIComponent(q),'https://www.quora.com/');
+        else shwLnk('/lookup.php?url='+encodeURIComponent('https://www.quora.com/search?q='+encodeURIComponent(q)),'https://www.quora.com/');
     }
     
     function stopSpkn() {
