@@ -31,13 +31,7 @@
         daisyInpt.value='';
         q=encodeURIComponent(trns);
         daisyInpt.value=trns;
-        if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/
-                                                                                                                      
-                                                                                                                      
-                                                                                                                      
-                                                                                                                      
-                                                                                                                      
-                                                                                                                      ='+encodeURIComponent('https://m.wikihow.com/wikiHowTo?search='+encodeURIComponent(trnsMat[3]+trnsMat[4])),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
+        if(trnsMat=trns.match(/(teach\s*(me)?|learn|study|read)\s*(how|about|on|that|of|at|in|this|to)(.+)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/wikiHowTo?search='+encodeURIComponent(trnsMat[3]+trnsMat[4])),'https://m.wikihow.com/','Now showing you '+trnsMat[3]+trnsMat[4]);
         else if(/(teach\s*(me)?|learn|study|read)/i.test(trns)) shwLnk('/lookup.php?url='+encodeURIComponent('https://m.wikihow.com/Main-Page'),'https://m.wikihow.com/','Now showing you things to learn');
         else if(trnsMat=trns.match(/(what\s*(i|')s\s*happ?ening?|(get|be)\s*(info(rmation)?|inform(ed)?|up(\s*to\s*)?date(s|d)?)|inform\s*me)/i)) shwLnk('/lookup.php?url='+encodeURIComponent('https://punchng.com/'),'https://punchng.com/','Now showing you News');
         else if(/\b(shut\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?(up|it|mouth)|It\s*(i|')s\s+ok(ay)?|keep\s+(quiet|calm))\b/i.test(trns)) { if(isTalking&&synth.speaking) synth.pause(); readOutLoud('Must you be harsh? Anyway, I will be keeping quiet'); }
