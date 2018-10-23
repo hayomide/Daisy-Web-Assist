@@ -25,6 +25,7 @@
             }
             shwLnk('/Fetch/jumia.php?u='+encodeURIComponent('catalog/?q='+encodeURIComponent(q)+'&sort='+encodeURIComponent(sort)+'&dir='+encodeURIComponent(dir)),'https://www.jumia.com.ng/','Now showing you '+clas+' '+q+'. You may use the highlighted link to check out what\'s on other stores');
         }
+        function rmvBadChars(el) { return el.trim.replace(/[\W_]+$/i,''); }
         if((er=event.results)&&(err=er[event.resultIndex])&&(errr=err[0])&&(trns=errr.transcript)) {}
         else if((et=event.target)&&(trns=et.value)) {}
         if(!trns) return;
@@ -43,11 +44,11 @@
             strt=val='';
         }
         else if(trnsMat=trns.match(/((gi(ve)?|te(ll)?)\s*mm?e\s+(yo)?ur?)\s+(.+)/i)) readOutLoud(trnsMat[6].replace(/your?/ig,'my')+'? Ain\'t gonna tell you. Find that out by yourself. You may be needing help from Elljay or Spider or Simi or any NaijaHacks official. Good luck!');
-        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?\s+of\s+(.+)/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
-        else if(trnsMat=trns.match(/((new|trending?)\s*)?(.+(?=songs?))/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(trnsMat[3].trim())),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
+        else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?\s+of\s+(.+)/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(rmvBadChars(trnsMat[3]))),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
+        else if(trnsMat=trns.match(/((new|trending?)\s*)?(.+(?=songs?))/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/search?q='+encodeURIComponent(rmvBadChars(trnsMat[3]))),'https://smart.ejasounds.com/','Now showing you some '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs of '+trnsMat[3]); }
         else if(trnsMat=trns.match(/((new|trending?)\s*)?songs?/i)) { shwLnk('/lookup.php?url='+encodeURIComponent('https://smart.ejasounds.com/'),'https://smart.ejasounds.com/','Now showing you '+(trnsMat[1]?trnsMat[1]+' ':'')+' songs'); }
         else if(trnsMat=trns.match(/((shopp?|order|buy)(ing)?\s*)?(\S+\s+(\S+\s+)?(\S+\s+)?)?(expensive|cheap|new|old|trending?|popular|hot|most\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?)|best\s*(bought|buy|ordere?d?|shopp?e?d?|selling|sold|sell?))\s+(\S+\s+(\S+\s+)?(\S+\s+)?(\S+\s+)?)?\s*(on|from|at|in|of|by)\s*(All?i\s*E(x|s)?press?|Jumia)/i)) {
-            var que=trnsMat[10].trim(),clas=trnsMat[7];
+            var que=rmvBadChars(trnsMat[10]),clas=trnsMat[7];
             if(/All?i\s*E(x|s)?press?/i.test(trnsMat[15])) {
                 var sort='total_tranpro_desc';
                 switch(clas) {
