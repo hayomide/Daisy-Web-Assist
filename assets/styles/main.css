@@ -6,6 +6,10 @@ body{
     font-family:Helvetica,Arial;
     font-size:14px;
     background-color:#fff;
+    background-image:url(../images/daisy-bg.png);
+    background-position:center;
+    background-repeat:round;
+    background-size:cover;
     color:#000;
 }
 a{
@@ -20,6 +24,7 @@ img{
     left:20px;
     z-index:12;
     width:57.5%;
+    filter:grayscale(50%) saturate(10) hue-rotate(60deg);
 }
 .daisy__main{
     border-radius:10px;
