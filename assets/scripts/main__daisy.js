@@ -25,7 +25,7 @@
             }
             shwLnk('/Fetch/jumia.php?u='+encodeURIComponent('catalog/?q='+encodeURIComponent(q)+'&sort='+encodeURIComponent(sort)+'&dir='+encodeURIComponent(dir)),'https://www.jumia.com.ng/','Now showing you '+clas+' '+q+'. You may use the highlighted link to check out what\'s on other stores');
         }
-        function rmvBadChars(el) { return el.trim.replace(/[\W_]+$/i,''); }
+        function rmvBadChars(el) { return el.trim().replace(/[\W_]+$/,''); }
         if((er=event.results)&&(err=er[event.resultIndex])&&(errr=err[0])&&(trns=errr.transcript)) {}
         else if((et=event.target)&&(trns=et.value)) {}
         if(!trns) return;
