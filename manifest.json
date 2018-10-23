@@ -9,6 +9,43 @@
            "description": "Daisy wanna understand what you are saying"
       }
   },
+  "icons": [
+      {
+        "src": "assets/images/favicon_16x11.png",
+        "type": "image/png",
+        "sizes": "16x11"
+      },
+      {
+        "src": "assets/images/favicon_48x41.png",
+        "type": "image/png",
+        "sizes": "48x41"
+      },
+      {
+        "src": "assets/images/favicon_96x83.png",
+        "type": "image/png",
+        "sizes": "96x83"
+      },
+      {
+        "src": "assets/images/favicon_128x111.png",
+        "type": "image/png",
+        "sizes": "128x111"
+      },
+      {
+        "src": "assets/images/favicon_144x125.png",
+        "type": "image/png",
+        "sizes": "144x125"
+      },
+      {
+        "src": "assets/images/favicon_152x138.png",
+        "type": "image/png",
+        "sizes": "152x138"
+      },
+      {
+        "src": "assets/images/favicon_192x167.png",
+        "type": "image/png",
+        "sizes": "192x167"
+      }
+  ],
   "type": "privileged",
   "start_url": "/?referrer=homescreen",
   "background_color": "#000000",
