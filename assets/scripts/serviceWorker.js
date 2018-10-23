@@ -78,7 +78,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', function(event) {
   var url=new URL(event.request.url), pathname=url.pathname, hostname=url.hostname, headers=event.request.headers;
-  if(event.request.method !== 'GET'||(event.request.cache==='only-if-cached'&&event.request.mode!=='same-origin')||(url.origin!=self.origin&&hostname!=='daisy-oreo.tech'&&hostname!=='68.66.242.35')) return;
+  if(event.request.method!=='GET'||(event.request.cache==='only-if-cached'&&event.request.mode!=='same-origin')||url.origin!=self.origin||/^\/Fetch\//i.test(pathname)) return;
   else if(/\.(jpe?g|png|gif)$/i.test(pathname)) event.respondWith(eitherCacheOrNet(event.request));
   else if(/\.(js(on)?|css)$/i.test(pathname)||/^\/([\w-]+)?$/i.test(pathname)) event.respondWith(fromCacheOrNet(event.request));
   else event.respondWith(fromNetOrCache(event.request));
