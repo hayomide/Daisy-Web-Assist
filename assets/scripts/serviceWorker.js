@@ -1,17 +1,24 @@
-var version='lzyVrs-1:::',cacheName=version+'fundamentals';
+var version='lzyVrs.1--',cacheName=version+'fundamentals';
 
 function preCache() {
     caches.open(cacheName).then(function(cache) {
       return cache.addAll([
         '/',
         '/?referrer=homescreen',
-        '/assets/styles/main.css',
-        '/assets/scripts/main.js',
-        '/assets/scripts/main__daisy.js',
-        '/assets/images/mic.png',
-        '/assets/images/daisy-bg.png',
-        '/assets/images/daisy-thumb.png',
-        '/assets/images/daisy-snapshot.png',
+        '../styles/main.css',
+        'main.js',
+        'main__daisy.js',
+        '../images/mic.png',
+        '../images/daisy-bg.png',
+        '../images/daisy-thumb.png',
+        '../images/daisy-snapshot.png',
+        '../images/favicon_16x11.png',
+        '../images/favicon_48x41.png',
+        '../images/favicon_96x83.png',
+        '../images/favicon_128x111.png',
+        '../images/favicon_144x125.png',
+        '../images/favicon_152x138.png',
+        '../images/favicon_192x167.png',
         '/loading.gif',
         '/manifest.json',
       ]);
@@ -106,7 +113,7 @@ self.addEventListener('activate', function(event) {
 
 function notify(title,options,click,error) {
     if(!options) options={};
-    // if(!options.icon) options.icon='/assets/images/icon.png';
+    if(!options.icon) options.icon='../images/favicon_48x41.png';
     if(!options.lang) options.lang='EN';
     if(!click||typeof click !== 'function') click=function() { console.log('clicked'); };
     if(!error||typeof error !== 'function') error=function() { console.log('error occured'); };
