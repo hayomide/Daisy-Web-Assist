@@ -1,4 +1,4 @@
-var version='lzyVrs-1::',cacheName=version+'fundamentals';
+var version='lzyVrs-1:::',cacheName=version+'fundamentals';
 
 function preCache() {
     caches.open(cacheName).then(function(cache) {
@@ -8,7 +8,10 @@ function preCache() {
         '/assets/styles/main.css',
         '/assets/scripts/main.js',
         '/assets/scripts/main__daisy.js',
-        '/assets/images/mic_20x29_cmp.png',
+        '/assets/images/mic.png',
+        '/assets/images/daisy-bg.png',
+        '/assets/images/daisy-thumb.png',
+        '/assets/images/daisy-snapshot.png',
         '/loading.gif',
         '/manifest.json',
       ]);
