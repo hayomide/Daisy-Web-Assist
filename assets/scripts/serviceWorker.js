@@ -1,7 +1,7 @@
-var version='lzyVr-1::';
+var cacheName='lzyVr-1::fundamentals';
 
 function preCache() {
-    caches.open(version+'fundamentals').then(function(cache) {
+    caches.open(cacheName).then(function(cache) {
       return cache.addAll([
         '/',
         '/?referrer=homescreen',
@@ -16,9 +16,8 @@ function preCache() {
     });
 }
 
-function eitherCacheOrNet(request,cacheName) {
-  if(!cacheName) cacheName='pages';
-  return caches.open(cacheToUse).then(function(cache) {
+function eitherCacheOrNet(request) {
+  return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(matching) {
         return matching || fetch(request).then(function(response) {
             return response;
@@ -27,9 +26,8 @@ function eitherCacheOrNet(request,cacheName) {
   });
 }
 
-function fromCacheOrNet(request,cacheName) {
-  if(!cacheName) cacheName='pages';
-  return caches.open(version+cacheName).then(function(cache) {
+function fromCacheOrNet(request) {
+  return caches.open(cacheName).then(function(cache) {
     return cache.match(request).then(function(matching) {
         return matching || fetch(request).then(function(response){
             if(response.ok) { cache.put(request,response.clone()); }
@@ -39,9 +37,8 @@ function fromCacheOrNet(request,cacheName) {
   });
 }
 
-function fromNetOrCache(request,cacheName) {
-  if(!cacheName) cacheName='pages';
-  return caches.open(version+cacheName).then(function(cache) {
+function fromNetOrCache(request) {
+  return caches.open(cacheName).then(function(cache) {
     return fetch(request).then(function(response) {
       if(response.ok) { cache.put(request, response.clone()); }
       return response;
@@ -53,9 +50,8 @@ function fromNetOrCache(request,cacheName) {
   });
 }
 
-function update(request,cacheName) {
-  if(!cacheName) cacheName='pages';
-  return caches.open(version+cacheName).then(function(cache) {
+function update(request) {
+  return caches.open(cacheName).then(function(cache) {
     return fetch(request).then(function(response) {
       if(response.ok) cache.put(request, response.clone());
       return response;
@@ -81,12 +77,13 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  var url=new URL(event.request.url), pathname=url.pathname, hostname=url.hostname, headers=event.request.headers, cacheName='pages';
-  if(event.request.method !== 'GET'||(event.request.cache==='only-if-cached'&&event.request.mode!=='same-origin')||(url.origin!=self.origin&&hostname!=='www.ejaworld.com'&&hostname!=='68.66.242.35')) return;
-  else if(/\.(js(on)?|css|jpe?g|png|gif)$/i.test(pathname)||/^\/[\w-]+$/i.test(pathname)) event.respondWith(fromCacheOrNet(event.request,cacheName));
-  else event.respondWith(fromNetOrCache(event.request,cacheName));
-  if(/\.(js(on)?|css)$/i.test(pathname)) event.waitUntil(update(event.request,cacheName));
-  else if(/^\/[\w-]+$/i.test(pathname)) event.waitUntil(update(event.request,cacheName).then(refresh));
+  var url=new URL(event.request.url), pathname=url.pathname, hostname=url.hostname, headers=event.request.headers;
+  if(event.request.method !== 'GET'||(event.request.cache==='only-if-cached'&&event.request.mode!=='same-origin')||(url.origin!=self.origin&&hostname!=='daisy-oreo.tech'&&hostname!=='68.66.242.35')) return;
+  else if(/\.(jpe?g|png|gif)$/i.test(pathname)) event.respondWith(eitherCacheOrNet(event.request));
+  else if(/\.(js(on)?|css)$/i.test(pathname)||/^\/([\w-]+)?$/i.test(pathname)) event.respondWith(fromCacheOrNet(event.request));
+  else event.respondWith(fromNetOrCache(event.request));
+  if(/\.(js(on)?|css)$/i.test(pathname)) event.waitUntil(update(event.request));
+  else if(/^\/[\w-]+$/i.test(pathname)) event.waitUntil(update(event.request).then(refresh));
 });
 
 self.addEventListener('activate', function(event) {
