@@ -18,4 +18,11 @@ $canonicalUrl=$protocol.$_SERVER['HTTP_HOST'].strtok($_SERVER['REQUEST_URI'],'?'
 <meta name="twitter:description" content="<?php echo $desc; ?>" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="assets/styles/main.css" />
-<link rel="manifest" href="manifest.json" lange="en" />
+<link rel="manifest" href="manifest.json" lang="en" />
+<link rel="icon" type="image/png" sizes="16x11" href="assets/images/favicon_16x11.png" />
+<link rel="icon" type="image/png" sizes="48x41" href="assets/images/favicon_48x41.png" />
+<link rel="icon" type="image/png" sizes="96x83" href="assets/images/favicon_96x83.png" />
+<link rel="icon" type="image/png" sizes="128x111" href="assets/images/favicon_128x111.png" />
+<link rel="icon" type="image/png" sizes="144x125" href="assets/images/favicon_144x125.png" />
+<link rel="icon" type="image/png" sizes="152x138" href="assets/images/favicon_152x138.png" />
+<link rel="icon" type="image/png" sizes="192x167" href="assets/images/favicon_192x167.png" />
