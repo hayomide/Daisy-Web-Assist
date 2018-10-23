@@ -1,0 +1,21 @@
+{
+  "short_name": "Daisy Assist",
+  "name": "Daisy Assist",
+  "permissions": {
+      "audio-capture": {
+           "description": "We need your voice. Daisy wanna ease your web activities"
+      },
+      "speech-recognition": {
+           "description": "Daisy wanna understand what you are saying"
+      }
+  },
+  "type": "privileged",
+  "start_url": "/?referrer=homescreen",
+  "background_color": "#000000",
+  "description": "Daisy makes almost all of your Web Activities so easy for you",
+  "display": "standalone",
+  "orientation": "natural",
+  "theme_color": "#000000",
+  "dir": "ltr",
+  "lang": "en"
+}

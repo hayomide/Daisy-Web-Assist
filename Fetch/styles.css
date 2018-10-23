@@ -1,0 +1,113 @@
+.hone{
+    text-decoration:underline;
+    text-align:center;
+    font-family:cursive;
+    text-shadow:1px 1px 10px;
+}
+.colour{
+    color:rgb(128,0,0);
+    color:rgba(128,0,0,.55555);
+}
+.lnthr{
+    text-decoration:line-through;
+}
+.avail-prds{
+    margin-top:50px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+}
+.prd{
+    position:relative;
+    margin:0 0 20px 12px;
+    width:300px;
+    height:220px;
+    background-color:#fff;
+    color:rgb(128,0,0);
+    color:rgba(128,0,0,.55555);
+    box-shadow:1px 1px 7px 1px;
+}
+.prd:after{
+    content:attr(data-for);
+    position:absolute;
+    top:10px;
+    right:0;
+    z-index:2;
+    background:rgba(128,0,0);
+    background-color:rgba(128,0,0,.55555);
+    color:#fff;
+    padding:5px 12px;
+    border-radius:25px 0 0 0;
+}
+.prd__img{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.prd__ux{
+    font-size:18px;
+    word-spacing:2px;
+    line-height:2;
+    font-family:fantasy;
+}
+.prd__desc{
+    position:absolute;
+    right:0;
+    bottom:0;
+    background-color:#fff;
+    padding:4px;
+    -webkit-border-radius:7px 0 0 0;
+    -moz-border-radius:7px 0 0 0;
+    border-radius:7px 0 0 0;
+}
+.prd__price{
+    position:absolute;
+    top:0;
+    left:0;
+    background-color:#fff;
+    padding:4px;
+    -webkit-border-radius:0 0 7px 0;
+    -moz-border-radius:0 0 7px 0;
+    border-radius:0 0 7px 0;
+}
+.prd__dsc__price{
+    position:absolute;
+    bottom:25%;
+    right:0;
+    background-color:#fff;
+    padding:4px;
+    -webkit-border-radius:7px 0 0 7px;
+    -moz-border-radius:7px 0 0 7px;
+    border-radius:7px 0 0 7px;
+}
+.prd__dsc__price:before{
+    content:"Discounted";
+}
+.prd__orders{
+    position:absolute;
+    bottom:25%;
+    left:0;
+    background-color:#fff;
+    padding:4px;
+    -webkit-border-radius:0 7px 7px 0;
+    -moz-border-radius:0 7px 7px 0;
+    border-radius:0 7px 7px 0;
+}
+.pgnat a{
+    background-color:rgb(128,0,0);
+    background-color:rgba(128,0,0,.55555);
+    color:#fff;
+    text-decoration:none;
+    padding:5px 20px;
+    font-size:17px;
+    font-family:cursive;
+    line-height:2;
+}
+.previous{
+    margin-right:5px;
+}
