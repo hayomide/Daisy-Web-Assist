@@ -18,6 +18,15 @@ a{
 img{
     cursor:pointer;
 }
+.usr-tlkn{
+    -webkit-transform:rotate(2.5deg);
+    -moz-transform:rotate(2.5deg);
+    -o-transform:rotate(2.5deg);
+    transform:rotate(2.5deg);
+}
+.daisy-tlkn{
+    background-blend-mode:luminous;
+}
 .daisy{
     position:fixed;
     bottom:16%;
